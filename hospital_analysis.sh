@@ -17,12 +17,15 @@ process_vitals() {
 }
 
 water_audit() {
-    echo "Running water usage audit..."
+    echo "============================================"
+    echo "  KNH Water Usage Audit - ICU_WATER_RESERVE"
+    echo "  Auditor: Ndagijimana Ismael"
+    echo "============================================"
 
     LOG="active_logs/water_usage.log"
 
     if [ ! -f "$LOG" ]; then
-        echo "Water usage log not found."
+        echo "[ERROR] Water usage log not found."
         return
     fi
 
@@ -33,10 +36,18 @@ water_audit() {
     }
     END {
         if (count > 0)
-            printf "\n--- ICU Water Reserve Audit ---\nTotal Readings : %d\nAverage Usage  : %.2f units\n-------------------------------\n", count, total/count
+            printf "\n============================================\n"
+            printf "  ICU WATER RESERVE SUMMARY\n"
+            printf "============================================\n"
+            printf "  Total Readings  : %d\n", count
+            printf "  Total Usage     : %.2f Liters\n", total
+            printf "  Average Usage   : %.2f Liters\n", total/count
+            printf "============================================\n"
         else
-            print "No ICU_WATER_RESERVE data found."
+            print "[WARNING] No ICU_WATER_RESERVE data found."
     }' "$LOG"
+
+    echo "[DONE] Water audit complete."
 }
 
 process_vitals
