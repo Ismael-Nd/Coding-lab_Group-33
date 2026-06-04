@@ -1,3 +1,4 @@
+
 initialize_system() {
 
     echo "============================================"
@@ -75,12 +76,8 @@ initialize_system() {
 }
 
 secure_data() {
-    echo "============================================"
-    echo "  KNH Security Configuration"
-    echo "============================================"
 
     # Set permissions: only the owner can read and write (600)
-    # No group or other access allowed — sensitive medical data
     echo "Applying strict permissions to active_logs/..."
     chmod 700 active_logs
 
